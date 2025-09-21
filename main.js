@@ -1,9 +1,9 @@
 // Constantes y arrays para la informaciion
 const COSTO_MENSUAL = 30; // Costo base por mes
 const ENTRADAS = [
-    { nombre: "individual", meses: 1, descuento: 0 },
-    { nombre: "Parejas", meses: 2, descuento: 0.50 }, // 50% de descuento
-    { nombre: "Amigos", meses: 6, descuento: 0.30 }      // 30% de descuento
+    { nombre: "individual", cantidad: 1, descuento: 0 },
+    { nombre: "Parejas", cantidad: 2, descuento: 0.50 }, // 50% de descuento
+    { nombre: "Amigos", cantidad: 6, descuento: 0.30 }      // 30% de descuento
 ];
 let usuariosRegistrados = []; 
 
@@ -24,18 +24,18 @@ function registrarUsuario() {
 }
 
 // 2. Función para calcular el costo de la membresía 
-function calcularCostoEntradas(CantidadesElegidas) {
+function calcularCostoEntradas(CantidadElegida) {
     let EntradaEncontrada = null;
     // Bucle `for` para encontrar la membresía elegida
     for (let i = 0; i < Entradas.length; i++) {
-        if (ENTRADAS[i].meses === mesesElegidos) {
+        if (ENTRADAS[i].cantidad === cantidadElegida) {
             EntradaEncontrada = ENTRADAS[i];
             break; // Salimos del bucle una vez que encontramos la membresía
         }
     }
 
     if (EntradaEncontrada) {
-        let costoSinDescuento = COSTO_MENSUAL * EntradaEncontrada.meses;
+        let costoSinDescuento = COSTO_MENSUAL * EntradaEncontrada.cantidad;
         let descuentoTotal = costoSinDescuento * EntradaEncontrada.descuento;
         let costoFinal = costoSinDescuento - descuentoTotal;
         return {
@@ -102,3 +102,4 @@ function iniciarSimulador() {
 // Llamada final para iniciar el simulador
 
 iniciarSimulador();
+
