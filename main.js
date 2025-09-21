@@ -1,9 +1,9 @@
 // Constantes y arrays para la informaciion
 const COSTO_MENSUAL = 30; // Costo base por mes
-const MEMBRESIAS = [
-    { nombre: "Clásica", meses: 1, descuento: 0 },
-    { nombre: "Trimestral", meses: 3, descuento: 0.50 }, // 50% de descuento
-    { nombre: "Anual", meses: 12, descuento: 0.30 }      // 30% de descuento
+const ENTRADAS = [
+    { nombre: "individual", meses: 1, descuento: 0 },
+    { nombre: "Parejas", meses: 2, descuento: 0.50 }, // 50% de descuento
+    { nombre: "Amigos", meses: 6, descuento: 0.30 }      // 30% de descuento
 ];
 let usuariosRegistrados = []; 
 
@@ -13,7 +13,7 @@ let usuariosRegistrados = [];
 
 // 1. Función para solicitar y procesar la entrada de datos del usuarios 
 function registrarUsuario() {
-    let nombreUsuario = prompt("¡Hola! Ingresa tu nombre para registrarte en el gimnasio:");
+    let nombreUsuario = prompt("¡Hola! Ingresa tu nombre para registrarte servicio de entradas del teatro:");
     // Validación para asegurar que el nombre no esté vacío
     if (nombreUsuario && nombreUsuario.trim() !== "") {
         return nombreUsuario;
@@ -24,22 +24,22 @@ function registrarUsuario() {
 }
 
 // 2. Función para calcular el costo de la membresía 
-function calcularCostoMembresia(mesesElegidos) {
-    let membresiaEncontrada = null;
+function calcularCostoEntradas(CantidadesElegidas) {
+    let EntradaEncontrada = null;
     // Bucle `for` para encontrar la membresía elegida
-    for (let i = 0; i < MEMBRESIAS.length; i++) {
-        if (MEMBRESIAS[i].meses === mesesElegidos) {
-            membresiaEncontrada = MEMBRESIAS[i];
+    for (let i = 0; i < Entradas.length; i++) {
+        if (ENTRADAS[i].meses === mesesElegidos) {
+            EntradaEncontrada = ENTRADAS[i];
             break; // Salimos del bucle una vez que encontramos la membresía
         }
     }
 
-    if (membresiaEncontrada) {
-        let costoSinDescuento = COSTO_MENSUAL * membresiaEncontrada.meses;
-        let descuentoTotal = costoSinDescuento * membresiaEncontrada.descuento;
+    if (EntradaEncontrada) {
+        let costoSinDescuento = COSTO_MENSUAL * EntradaEncontrada.meses;
+        let descuentoTotal = costoSinDescuento * EntradaEncontrada.descuento;
         let costoFinal = costoSinDescuento - descuentoTotal;
         return {
-            nombre: membresiaEncontrada.nombre,
+            nombre: EntradaEncontrada.nombre,
             costo: costoFinal.toFixed(2) // Redondeamos a 2 decimales
         };
     } else {
@@ -48,17 +48,17 @@ function calcularCostoMembresia(mesesElegidos) {
 }
 
 // 3. Función para mostrar los resultados al usuario (Salida)
-function mostrarResultado(nombre, infoMembresia) {
-    if (infoMembresia) {
-        alert(`¡Registro exitoso, ${nombre}!\n\nTu membresía ${infoMembresia.nombre} ha sido procesada.\n\nEl costo total es de $${infoMembresia.costo} USD.\n\n¡Bienvenido a la familia del gimnasio!`);
+function mostrarResultado(nombre, infoEntrada) {
+    if (infoEntrada) {
+        alert(`¡Registro exitoso, ${nombre}!\n\nTu entrada ${infoEntrada.nombre} ha sido procesada.\n\nEl costo total es de $${infoEntradas.costo} USD.\n\n¡Bienvenido al Teatro!`);
         console.log(` Nuevo usuario registrado: ${nombre}`);
-        console.log(` Membresía seleccionada: ${infoMembresia.nombre} - Costo: $${infoMembresia.costo} `);
+        console.log(` Entradas seleccionadas: ${infoEntrada.nombre} - Costo: $${infoEntrada.costo} `);
         
         // Agregar el usuario al array de registrados
-        usuariosRegistrados.push({ nombre: nombre, membresia: infoMembresia.nombre, costo: infoMembresia.costo });
+        usuariosRegistrados.push({ nombre: nombre, entradas: infoEntrada.nombre, costo: infoEntrada.costo });
     } else {
         alert("Ha ocurrido un error al procesar tu membresía. Inténtalo de nuevo.");
-        console.error(" Error en el proceso de cálculo de membresía.");
+        console.error(" Error en el proceso de cálculo de entradas.");
     }
 }
 
@@ -75,16 +75,16 @@ function iniciarSimulador() {
 
         // Condicional `if` para verificar si el usuario ingresó un nombre válido
         if (nombreNuevoUsuario) {
-            let meses = parseInt(prompt("Ahora, elige tu membresía:\n\n1. Clásica (1 mes)\n2. Trimestral (3 meses)\n3. Anual (12 meses)\n\nIngresa el número de meses (1, 3 o 12):"));
+            let cantidad = parseInt(prompt("Ahora, elige tus entradas:\n\n1. Individual (1)\n2. pareja (2)\n3. Amigos (6)\n\nIngresa el número de meses (1, 2 o 6):"));
             
             // Condicional `if` para validar la selección del usuario
-            if (meses === 1 || meses === 3 || meses === 12) {
+            if (cantidad === 1 || cantidad === 2 || cantidad === 6) {
                 // 2. Procesamiento de datos
-                let infoMembresia = calcularCostoMembresia(meses);
+                let infoEntrada = calcularCostoEntradas(cantidad);
                 // 3. Salida de datos
-                mostrarResultado(nombreNuevoUsuario, infoMembresia);
+                mostrarResultado(nombreNuevoUsuario, infoEntradas);
             } else {
-                alert("Selección de meses no válida. Por favor, elige 1, 3 o 12.");
+                alert("Selección de entradas no válida. Por favor, elige 1, 2 o 6.");
                 console.warn(" Selección de meses no válida por el usuario.");
             }
         }
@@ -96,8 +96,9 @@ function iniciarSimulador() {
     console.log("-----------------------------------------");
     console.log("¡Simulador finalizado!");
     console.log("Lista de todos los usuarios registrados:");
-    console.table(usuariosRegistrados); // Usa console.table para una visualización más clara
+    console.table(usuariosRegistrados); // Usa console.table para una visualización 
 }
 
 // Llamada final para iniciar el simulador
+
 iniciarSimulador();
