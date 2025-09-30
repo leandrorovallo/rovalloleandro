@@ -98,10 +98,9 @@ function iniciarSimulador() {
     console.log("Lista de todos los usuarios registrados:");
     console.table(usuariosRegistrados); // Usa console.table para una visualización 
 }
-
 // Llamada final para iniciar el simulador
-
 iniciarSimulador();
+
 
 
 
