@@ -28,7 +28,7 @@ function calcularCostoEntradas(CantidadElegida) {
     let EntradaEncontrada = null;
     // Bucle `for` para encontrar la membresía elegida
     for (let i = 0; i < Entradas.length; i++) {
-          if (ENTRADAS[i].cantidad === cantidadElegida) {
+        if (ENTRADAS[i].cantidad === cantidadElegida) {
             EntradaEncontrada = ENTRADAS[i];
             break; // Salimos del bucle una vez que encontramos la membresía
         }
@@ -102,5 +102,6 @@ function iniciarSimulador() {
 // Llamada final para iniciar el simulador
 
 iniciarSimulador();
+
 
 
